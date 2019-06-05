@@ -42,7 +42,9 @@ void Graphics::InitializeGraphics(IDirect3DDevice9* p_Device)
     ImGui_ImplDX9_Init(m_Device);
 
     m_ShowChatLog = false;
+    m_ShowVisibleEnumatorWindow = false;
     m_MenuOpen = true;
+    m_ShowRotatorCreator = false;
     m_WindowFlags |= ImGuiWindowFlags_MenuBar;
 }
 
@@ -118,13 +120,22 @@ void Graphics::DrawGUI()
     if (m_ShowChatLog)
         ConsoleChatLog();
 
-    //ImGui::ShowDemoWindow(&m_ShowChatLog);
+    if (m_ShowVisibleEnumatorWindow)
+        VisibleEnumatorWindow(&m_ShowVisibleEnumatorWindow);
+
+    if (m_ShowRotatorCreator)
+        ShowRotatorCreator(&m_ShowRotatorCreator);
+
+    bool test = true;
+    ImGui::ShowDemoWindow(&test);
 
     if (ImGui::BeginMenuBar())
     {
         if (ImGui::BeginMenu("Tools"))
         {
             ImGui::MenuItem("Chat History", NULL, &m_ShowChatLog);
+            ImGui::MenuItem("Visible Players", NULL, &m_ShowVisibleEnumatorWindow);
+            ImGui::MenuItem("Rotation Creator", NULL, &m_ShowRotatorCreator);
             ImGui::EndMenu();
         }
         ImGui::EndMenuBar();

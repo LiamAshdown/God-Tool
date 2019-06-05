@@ -10,6 +10,7 @@
 #define GetCoinageAddr 0x0051A2B0
 #define IntersectAddr 0x0077F310
 #define ProcessPacketsAddr 0x00631FE0
+#define GetUnitReactionAddr 0x007251C0
 
 #define GetAuraCountAddr 0x004F8850
 #define GetSpellAuraId 0x004F8870
@@ -87,4 +88,25 @@ inline int PerformanceCount()
 inline int GetVirtualFuncAddr(int addr, int offset) 
 { 
     return addr ? *(int*)(*(int*)addr + 4 * offset) : 0;
+}
+
+inline int ClntObjMgrGetMapID()
+{
+    return ((int(__cdecl*)())0x004D37E0)();
+}
+
+inline int GetAreaId()
+{
+    return *(int*)(0x00BD0810);
+}
+
+inline int GetTotalSpells()
+{
+    //return *(int*)(0x00BE8D98);
+    return *(int*)(0x00BE8D98);
+}
+
+inline int* GetSpellRowOffset()
+{
+    return (int*)(0x00BE6D88);
 }

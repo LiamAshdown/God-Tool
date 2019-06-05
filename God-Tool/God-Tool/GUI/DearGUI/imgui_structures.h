@@ -2,9 +2,9 @@
 #include "../../Detour/DirectX/DirectX.h"
 #include <deque>
 
-#include "DearGui/imgui.h"
-#include "DearGui/imgui_impl_dx9.h"
-#include "DearGui/imgui_impl_win32.h"
+#include "imgui.h"
+#include "imgui_impl_dx9.h"
+#include "imgui_impl_win32.h"
 
 struct ConsolePacketLog
 {
@@ -70,3 +70,6 @@ struct ConsolePacketLog
         ImGui::End();
     }
 };
+
+void VisibleEnumatorWindow(bool* p_open);
+void ShowRotatorCreator(bool* p_open);

@@ -2,6 +2,18 @@
 #include "CGObject_C.h"
 #include "Aura/Aura.h"
 
+enum ReputationRank
+{
+    REP_HATED       = 0,
+    REP_HOSTILE     = 1,
+    REP_UNFRIENDLY  = 2,
+    REP_NEUTRAL     = 3,
+    REP_FRIENDLY    = 4,
+    REP_HONORED     = 5,
+    REP_REVERED     = 6,
+    REP_EXALTED     = 7
+};
+
 class CGUnit_C : public CGObject_C
 {
 public:
@@ -14,6 +26,8 @@ public:
     int GetMana() const { return GetValue<uint64>(UNIT_FIELD_BASE_MANA); }
     int GetLevel() const { return GetValue<uint64>(UNIT_FIELD_LEVEL); }
     uint64 GetGUID() const { return GetValue<uint64>(OBJECT_FIELD_GUID); }
+
+    int GetUnitReaction(CGUnit_C* p_Target) { return ((int(__thiscall*)(DWORD p_BaseAddress, DWORD p_Target))GetUnitReactionAddr)((DWORD)this, (DWORD)p_Target); }
 
     /// Auras
     int GetAuraCount() { return ((int(__thiscall*)(DWORD p_BaseAddress))GetAuraCountAddr)((DWORD)this); }

@@ -5,7 +5,7 @@
 
 typedef struct
 {
-    DWORD m_ID;
+    DWORD m_ID = 0;
     DWORD m_category;
     DWORD m_dispelType;
     DWORD m_mechanic;
@@ -59,7 +59,7 @@ typedef struct
     DWORD m_equippedItemClass;
     DWORD m_equippedItemSubclass;
     DWORD m_equippedItemInvTypes;
-    DWORD m_effect[3];
+    DWORD m_effect[3];                      ///< Spell Effect Type      
     DWORD m_effectDieSides[3];
     float m_effectRealPointsPerLevel[3];
     DWORD m_effectBasePoints[3];
@@ -67,7 +67,7 @@ typedef struct
     DWORD m_implicitTargetA[3];
     DWORD m_implicitTargetB[3];
     DWORD m_effectRadiusIndex[3];
-    DWORD m_effectAura[3];
+    DWORD m_effectAura[3];                  ///< Spell Aura Type
     DWORD m_effectAuraPeriod[3];
     float m_effectAmplitude[3];
     DWORD m_effectChainTargets[3];
@@ -110,7 +110,7 @@ typedef struct
     float m_effectBonusCoefficient[3];
     DWORD m_descriptionVariablesID;
     DWORD m_difficulty;
-}SpellEntry;
+}SpellEntryRec;
 
 typedef struct
 {
@@ -144,3 +144,53 @@ typedef struct
     int Duration;
     int EndTime;
 }AuraRec;
+
+typedef struct
+{
+    DWORD m_ID;
+    DWORD m_ContinentID;
+    DWORD m_ParentAreaID;
+    DWORD m_AreaBit;
+    DWORD m_flags;
+    DWORD m_SoundProviderPref;
+    DWORD m_SoundProviderPrefUnderwater;
+    DWORD m_AmbienceID;
+    DWORD m_ZoneMusic;
+    DWORD m_IntroSound;
+    DWORD m_ExplorationLevel;
+    char *m_AreaName_lang;
+    DWORD m_factionGroupMask;
+    DWORD m_liquidTypeID[4];
+    float m_minElevation;
+    float m_ambient_multiplier;
+    DWORD m_lightid;
+}AreaTableEntry; // 241
+
+typedef struct WoWClientDBStruct
+{
+    void *funcTable;
+    int isLoaded;
+    int numRows;
+    int maxIndex;
+    int minIndex;
+    int stringTable;
+    void* funcTable2;
+    int* FirstRow;
+    int* Rows;
+}WoWClientDBRec;
+
+typedef struct WMOAreaTableStruct
+{
+    DWORD m_ID;
+    DWORD m_WMOID;
+    DWORD m_NameSetID;
+    DWORD m_WMOGroupID;
+    DWORD m_SoundProviderPref;
+    DWORD m_SoundProviderPrefUnderwater;
+    DWORD m_AmbienceID;
+    DWORD m_ZoneMusic;
+    DWORD m_IntroSound;
+    DWORD m_flags;
+    DWORD m_AreaTableID;
+    char *m_AreaName_lang;
+}WMOAreaTableRec;

@@ -15,7 +15,7 @@ public:
     bool __thiscall IsInPartyOrRaid() { return ((bool(__thiscall*)(DWORD p_BaseAddress))IsInRaidOrPartyAddr)((DWORD)this); }
     int __thiscall GetCoinage() { return ((int(__thiscall*)(DWORD p_BaseAddress))GetCoinageAddr)((DWORD)this); }
 
-    bool IntersectsTarget(CGPlayer_C* p_Target)
+    bool IsInLoS(CGPlayer_C* p_Target)
     {
         if (p_Target)
         {
@@ -26,7 +26,16 @@ public:
             GetPosition(*l_PlayerPos);
             p_Target->GetPosition(*l_TargetPos);
             float l_Unk = 1.0f;
-            char test = WorldIntersect(l_PlayerPos, l_TargetPos, l_ResultPos, &l_Unk, 0x100111, 0);
+            char l_Intersect = WorldIntersect(l_PlayerPos, l_TargetPos, l_ResultPos, &l_Unk, 0x100111, 0);
+
+            delete l_PlayerPos;
+            delete l_TargetPos;
+            delete l_ResultPos;
+
+            if (l_Intersect <= 0)
+                return true;
+            else
+                return false;
         }
     }
 

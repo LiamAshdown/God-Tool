@@ -8,7 +8,7 @@ class Aura
 public:
     Aura(AuraRec& p_Rec) : m_AuraRec(p_Rec)
     {
-        sDatabaseMgr->GetDatabaseByIndex(Spell)->GetLocalizedRow(p_Rec.SpellId, m_SpellEntry);
+        sDatabaseMgr->GetDatabaseByIndex(Spell)->GetSpellRow(p_Rec.SpellId, m_SpellEntry);
     }
 
     Aura() {}
@@ -21,6 +21,11 @@ public:
         return m_AuraRec;
     }
 
+    SpellEntryRec& GetSpell()
+    {
+        return m_SpellEntry;
+    }
+
     int DurationRemaining()
     {
         return m_AuraRec.EndTime == 0 ? 0 : m_AuraRec.EndTime - PerformanceCount();
@@ -29,5 +34,5 @@ public:
 private:
     uint64 m_CreatorGUID;
     AuraRec m_AuraRec;
-    SpellEntry m_SpellEntry;
+    SpellEntryRec m_SpellEntry;
 };

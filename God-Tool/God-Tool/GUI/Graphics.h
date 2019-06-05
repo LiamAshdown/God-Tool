@@ -96,6 +96,8 @@ private:
 private:
     ImGuiWindowFlags m_WindowFlags;
     bool m_ShowChatLog;
+    bool m_ShowVisibleEnumatorWindow;
+    bool m_ShowRotatorCreator;
     bool m_MenuOpen;
 };
 

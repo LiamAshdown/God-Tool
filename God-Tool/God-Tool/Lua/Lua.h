@@ -2,9 +2,9 @@
 
 #include "../Common/SharedDefines.h"
 
-inline void FramescriptExecute(const char* text)
+inline int FramescriptExecute(const char* text)
 {
-    ((void(__cdecl*)(const char*, const char*, void*))0x00819210)(text, "QuadBot", nullptr);
+    return ((int(__cdecl*)(const char*, const char*, void*))0x00819210)(text, "GodTool.lua", nullptr);
 }
 
 inline auto FramescriptRegister(const char* command, const int func_pointer)

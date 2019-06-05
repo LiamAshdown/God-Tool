@@ -249,17 +249,24 @@ public:
     Database(int p_TablePtr);
     ~Database();
 
+public:
     int GetRowPtr(int p_Index);
 
-    template <typename WoWClientDB>
-    bool GetLocalizedRow(int p_Index, WoWClientDB& p_Data);
+    int GetRowCount() const;
+    int GetMinIndex() const;
+
+    WoWClientDBRec* GetClientDB() const;
+
+    template <typename WoWClientDBRec>
+    bool GetSpellRow(int p_Index, WoWClientDBRec& p_Data);
 
 private:
     int m_TablePtr;
+    WoWClientDBRec* m_ClientDB;
 };
 
-template<typename WoWClientDB>
-bool Database::GetLocalizedRow(int p_Index, WoWClientDB& p_Data)
+template<typename WoWClientDBRec>
+inline bool Database::GetSpellRow(int p_Index, WoWClientDBRec& p_Data)
 {
-    return ((bool(__thiscall*)(int, int, WoWClientDB&))0x004CFD20)(m_TablePtr, p_Index, p_Data);
+    return ((bool(__thiscall*)(int, int, WoWClientDBRec&))0x004CFD20)(m_TablePtr, p_Index, p_Data);
 }

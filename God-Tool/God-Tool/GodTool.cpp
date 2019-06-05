@@ -1,4 +1,5 @@
 #include "GodTool.h"
+#include "Lua/Lua.h"
 #include "GUI/Graphics.h"
 
 GodTool * GodTool::instance()
@@ -13,8 +14,9 @@ GodTool::GodTool()
     m_Detours["AddChatMessage"] = new Detour(AddChatAddr, (int)&GodTool::AddChatMessage);
     m_PulseTimer.Reset();
 
-    /// Immediantly start getting surrounding objects
-    EnumerateVisibleObjects(EnumerateVisibleObjectsCallBack, NULL);
+    FramescriptExecute("DEFAULT_CHAT_FRAME:AddMessage(\"|c00D358F7GodTool|r Loaded GodTool successfully. By Quadral\")");
+
+    LoadLocalPlayerSpells();
 }
 
 GodTool::~GodTool()
@@ -26,11 +28,29 @@ void GodTool::Update()
     for (auto const& l_Itr : m_Detours)
         l_Itr.second->Apply();
 
+    //FramescriptExecute("CastSpellByName(\"Demon Skin\")");
+
     if (m_PulseTimer.Elasped() > 10000)
     {
         m_PulsePlayers.clear();
         EnumerateVisibleObjects(EnumerateVisibleObjectsCallBack, NULL);
         m_PulseTimer.Reset();
+    }
+}
+
+void GodTool::LoadLocalPlayerSpells()
+{
+    for (int v19 = 0; v19 < GetTotalSpells(); ++v19)
+    {
+        int* rowId = (int*)(0x00BE6D88);
+        int v20 = rowId[v19];
+
+        SpellEntryRec l_Entry;
+        sDatabaseMgr->GetDatabaseByIndex(Spell)->GetSpellRow(v20, l_Entry);
+
+        SpellRotator* l_SpellRotator = new SpellRotator(std::move(l_Entry));
+
+        m_LocalPlayerSpells.push_back(l_SpellRotator);
     }
 }
 
@@ -97,7 +117,6 @@ int __cdecl GodTool::AddChatMessage(char* p_Text, int8 p_Type, char* p_Player, i
 
         if (l_Sender)
             sGraphics->m_ConsoleChatLog.ChatLog.push_back(l_Channel + l_Sender->GetObjectName() + ": " + p_Text + "\n");
-
     }
 
     auto l_Itr = sGodTool->m_Detours["AddChatMessage"];

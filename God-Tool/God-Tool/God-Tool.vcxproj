@@ -181,6 +181,7 @@
     <ClInclude Include="Objects\CGObject_C.h" />
     <ClInclude Include="Objects\CGPlayer_C.h" />
     <ClInclude Include="Objects\CGUnit_C.h" />
+    <ClInclude Include="Objects\Spell.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClientService\CDatastore.cpp" />
@@ -190,6 +191,7 @@
     <ClCompile Include="Detour\DirectX\DirectX.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="GodTool.cpp" />
+    <ClCompile Include="GUI\DearGUI\imgui_structures.cpp" />
     <ClCompile Include="GUI\Graphics.cpp" />
     <ClCompile Include="GUI\DearGUI\imgui.cpp" />
     <ClCompile Include="GUI\DearGUI\imgui_demo.cpp" />
