@@ -1364,7 +1364,7 @@ void ImGui::ShowDemoWindow(bool* p_open)
         if (ImGui::TreeNode("Querying Status (Active/Focused/Hovered etc.)"))
         {
             // Display the value of IsItemHovered() and other common item state functions. Note that the flags can be combined.
-            // (because BulletText is an item itself and that would affect the output of IsItemHovered() we pass all state in a single call to simplify the code).
+            // (because BulletText is an item itself and thImGui::Buttonat would affect the output of IsItemHovered() we pass all state in a single call to simplify the code).
             static int item_type = 1;
             static bool b = false;
             static float col4f[4] = { 1.0f, 0.5, 0.0f, 1.0f };
@@ -1659,7 +1659,6 @@ void ImGui::ShowDemoWindow(bool* p_open)
                     ImGui::SameLine();
                 ImGui::PopID();
             }
-
             ImGui::TreePop();
         }
 
@@ -1870,7 +1869,7 @@ void ImGui::ShowDemoWindow(bool* p_open)
     {
         if (ImGui::TreeNode("Popups"))
         {
-            ImGui::TextWrapped("When a popup is active, it inhibits interacting with windows that are behind the popup. Clicking outside the popup closes it.");
+            ImGui::TextWrapped("When a popup is active, it inhibits interacting with windows that are behind the popup. Clicking outside the popup es it.");
 
             static int selected_fish = -1;
             const char* names[] = { "Bream", "Haddock", "Mackerel", "Pollock", "Tilefish" };

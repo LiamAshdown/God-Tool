@@ -6,7 +6,7 @@ static void ShowPlayerInfo(bool* p_open, CGPlayer_C* p_Player)
 {
     ImGui::SetNextWindowSize(ImVec2(500, 600), ImGuiCond_FirstUseEver);
 
-    if (ImGui::Begin("Player Info", p_open))
+    if (ImGui::Begin("Player Info", p_open, ImGuiWindowFlags_NoResize))
     {
         ImGui::Text("Player Info");
         ImGui::Text("Player Name: %s", p_Player->GetObjectName());
@@ -76,12 +76,16 @@ void VisibleEnumatorWindow(bool* p_open)
 
 void ShowSpellList(bool* p_open)
 {
-    ImGui::SetNextWindowSize(ImVec2(500, 440), ImGuiCond_FirstUseEver);
-    if (ImGui::Begin("Local Spell List", p_open))
+    static SpellRotator* s_SpellRotator = nullptr;
+    static SpellRotator s_TempSpellRotator;
+    static bool l_ShowRightSide = false;
+
+    if (s_TempSpellRotator.DispelStruct.ShowDispelWindow)
+        s_TempSpellRotator.DispelStruct.DrawDispelWindow(s_TempSpellRotator);
+
+    ImGui::SetNextWindowSize(ImVec2(500, 440), ImGuiCond_Always);
+    if (ImGui::Begin("Local Spell List", p_open, ImGuiWindowFlags_NoCollapse))
     {
-        static bool l_ShowRightSide = false;
-        static SpellRotator* s_SpellRotator = nullptr;
-        static SpellRotator s_TempSpellRotator;
         ImGui::BeginChild("Spell List", ImVec2(180, 0), true);
         for (auto l_Itr : sGodTool->GetLocalSpells())
         {
@@ -125,7 +129,6 @@ void ShowSpellList(bool* p_open)
             }
             ImGui::EndGroup();
         }
-
     }
     ImGui::End();
 }

@@ -1,4 +1,5 @@
-﻿  imgui_structures.cpp
+﻿  imgui_demo.cpp
+  imgui_structures.cpp
   c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
 f:\liam-work\god-tool\god-tool\god-tool\god-tool\common\offsets.h(74): warning C4244: 'return': conversion from 'uint64' to 'DWORD', possible loss of data
 f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(24): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
@@ -21,5 +22,75 @@ f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(27): warning
           [
               T=uint64
           ]
+  Graphics.cpp
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\common\offsets.h(74): warning C4244: 'return': conversion from 'uint64' to 'DWORD', possible loss of data
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(24): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(25): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(26): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(27): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+  GodTool.cpp
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\common\offsets.h(74): warning C4244: 'return': conversion from 'uint64' to 'DWORD', possible loss of data
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(24): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(25): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(26): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(27): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+  dllmain.cpp
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\common\offsets.h(74): warning C4244: 'return': conversion from 'uint64' to 'DWORD', possible loss of data
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(24): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(25): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(26): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgunit_c.h(27): warning C4244: 'return': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=uint64
+          ]
+  Generating Code...
 f:\liam-work\god-tool\god-tool\god-tool\god-tool\objects\cgplayer_c.h(40): warning C4715: 'CGPlayer_C::IsInLoS': not all control paths return a value
   God-Tool.vcxproj -> F:\liam-work\God-Tool\God-Tool\God-Tool\Debug\God-Tool.dll

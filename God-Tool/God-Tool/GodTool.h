@@ -38,7 +38,7 @@ public:
             HealthStruct.Draw();
         }
         else if (SpellEntry.m_effect[0] == SPELL_EFFECT_DISPEL)
-            UnionStruct.DispelStruct.Draw();
+            DispelStruct.Draw();
         else
         {
             UnionStruct.ManaStruct.Draw();
@@ -54,7 +54,6 @@ public:
         UnionStruct = { false };
     }
 
-private:
     void DrawEnabled()
     {
         std::string l_SpellName = SpellEntry.m_name_lang;
@@ -117,6 +116,129 @@ private:
         }
     }UseInCombatStruct = { false };
 
+    struct
+    {
+        bool Enabled;
+        bool ShowDispelWindow;
+        bool ShowAddAuraWindow;
+        bool ShowErrorWindow;
+        const char* Title;
+        const char* Content;
+        std::vector<SpellEntryRec> Auras;
+
+        void Draw()
+        {
+            ImGui::PushID("Dispel Aura");
+            ImGui::Checkbox("Dispel Aura", &Enabled);
+            ImGui::PopID();
+            ImGui::SameLine();
+
+            if (ImGui::Button("Dispel List"))
+                ShowDispelWindow = true;
+        }
+
+        void DrawDispelWindow(SpellRotatorStruct& p_SpellRotator)
+        {
+            if (ShowAddAuraWindow)
+                DrawAddAuraWindow(p_SpellRotator);
+
+            static bool ShowRemoveAura = false;
+
+            static std::vector<SpellEntryRec>::iterator* s_Itr = nullptr;
+
+            if (ImGui::Begin("Dispel List", &ShowDispelWindow, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysAutoResize))
+            {
+                ImGui::Text("Auras to Dispel");
+                ImGui::Separator();
+
+                for (auto l_Itr = Auras.begin(); l_Itr != Auras.end(); l_Itr++)
+                {
+                    std::string l_Name = ((std::string)l_Itr->m_name_lang + "(" + std::to_string(l_Itr->m_ID) + ")");
+
+                    if (ImGui::Selectable(l_Name.c_str()))
+                    {
+                        s_Itr = &l_Itr;
+                        ShowRemoveAura = true;
+                    }
+
+                    if (ImGui::IsItemHovered())
+                    {
+                        if (ImGui::BeginPopupContextWindow((char*)"window_context1", 0, true))
+                        {
+                            if (ImGui::MenuItem("Remove Aura"))
+                                Auras.erase(*s_Itr);
+                            ImGui::EndPopup();
+                        }
+                    }
+                }
+
+                if (ImGui::BeginPopupContextWindow())
+                {
+                    if (ImGui::MenuItem("Add new Aura"))
+                    {
+                        if (ShowAddAuraWindow)
+                            ShowAddAuraWindow = false;
+                        else
+                            ShowAddAuraWindow = true;
+                    }
+                    ImGui::EndPopup();
+                }
+
+                ImGui::End();
+            }
+        }
+
+        void DrawAddAuraWindow(SpellRotatorStruct& p_SpellRotator)
+        {
+            ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_FirstUseEver);
+            if (ImGui::Begin("Add new aura", &ShowAddAuraWindow, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysAutoResize))
+            {
+                if (ShowErrorWindow)
+                    DrawError();
+
+                if (ShowAddAuraWindow)
+                {
+                    int l_SpellId = 0;
+                    ImGui::Text("Enter Aura Id");
+                    bool l_Enter = ImGui::InputInt("", &l_SpellId, 0, 0, ImGuiInputTextFlags_EnterReturnsTrue);
+
+                    if (l_Enter)
+                    {
+                        SpellEntryRec l_Entry;
+                        sDatabaseMgr->GetDatabaseByIndex(Spell)->GetSpellRow(l_SpellId, l_Entry);
+                        if (l_Entry.m_ID == 0)
+                        {
+                            ShowErrorWindow = true;
+                            Title = "Error";
+                            Content = "Incorrect Aura ID. Could not find aura with that ID. Please try again.";
+                        }
+                        else
+                        {
+                            Auras.push_back(l_Entry);
+                            ShowAddAuraWindow = false;
+                        }
+                    }
+                }
+                ImGui::End();
+            }
+        }
+
+        void DrawError()
+        {
+            ImGui::OpenPopup(Title);
+            if (ImGui::BeginPopupModal(Title, &ShowErrorWindow))
+            {
+                ImGui::Text(Content);
+                if (ImGui::Button("Close"))
+                {
+                    ShowErrorWindow = false;
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
+            }
+        }
+    }DispelStruct = { false, false, false, false };
+
     union
     {
         struct
@@ -153,20 +275,7 @@ private:
 
         }KeepBuffActiveStruct;
 
-        struct
-        {
-            bool Enabled;
-
-            void Draw()
-            {
-                ImGui::PushID("Dispel Aura");
-                ImGui::Checkbox("Dispel Aura", &Enabled);
-                ImGui::PopID();
-                ImGui::Spacing();
-            }
-
-        }DispelStruct;
-    }UnionStruct = { false };
+    }UnionStruct = { false, 100 };
 
 }SpellRotator;
 
